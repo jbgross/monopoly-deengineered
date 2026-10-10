@@ -40,7 +40,7 @@ public interface Square {
      * Method invoked when a square tile is being purchased.
      * @param player    Player
      */
-    void purchase(Player player);
+    void purchase(OnePlayer player);
 
     /**
      * Rent value of the square tile.
@@ -53,7 +53,7 @@ public interface Square {
      * Return owner of the square tile.
      * @return  Player
      */
-    Player owner();
+    OnePlayer owner();
 
     /**
      * toString method of a square tile.

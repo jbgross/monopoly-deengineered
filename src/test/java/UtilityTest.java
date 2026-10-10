@@ -12,7 +12,7 @@ public class UtilityTest {
     private Utility waterUtility;
     private Utility ownedElectricUtility;
     private Utility ownedWaterUtility;
-    private Player player;
+    private OnePlayer player;
 
     /**
      * Set up the Utility squares before each test.
@@ -22,7 +22,7 @@ public class UtilityTest {
         electricUtility = new Utility(Utility.ELECTRIC_POSITION, JsonParse.parseJSON(Utility.ELECTRIC_POSITION, "UK"));
         waterUtility = new Utility(Utility.WATER_POSITION, JsonParse.parseJSON(Utility.WATER_POSITION, "UK"));
 
-        player = new HumanPlayer("Tester");
+        player = new OnePlayer("Tester", true);
         ownedElectricUtility = new Utility(Utility.ELECTRIC_POSITION, JsonParse.parseJSON(Utility.ELECTRIC_POSITION, "UK"));
         ownedWaterUtility = new Utility(Utility.WATER_POSITION, JsonParse.parseJSON(Utility.WATER_POSITION, "UK"));
 

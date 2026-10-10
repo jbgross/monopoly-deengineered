@@ -18,7 +18,7 @@ public class Property implements Square, Serializable {
 
     private final int position;
     private final String name;
-    private Player owner;
+    private OnePlayer owner;
     private boolean owned;
     private final Property[] others; // collection of player's property
     private final int propertyCost;  // cost to purchase the property
@@ -108,7 +108,7 @@ public class Property implements Square, Serializable {
      * @param player    Player
      */
     @Override
-    public void purchase(Player player) {
+    public void purchase(OnePlayer player) {
         owned = true;
         owner = player;
         updateMonopoly(player);
@@ -142,7 +142,7 @@ public class Property implements Square, Serializable {
      * @return  Player
      */
     @Override
-    public Player owner() {
+    public OnePlayer owner() {
         return this.owner;
     }
 
@@ -174,7 +174,7 @@ public class Property implements Square, Serializable {
      * Set monopoly to true if player has a set or false if they do not.
      * @param player Player
      */
-    public void updateMonopoly(Player player) {
+    public void updateMonopoly(OnePlayer player) {
         boolean setA = false;
         boolean setB = others[1] == null;
 

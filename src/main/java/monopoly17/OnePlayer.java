@@ -10,21 +10,27 @@ import static monopoly17.GameBoard.BOARD_SIZE;
  * This class represents the CPU player of this game.
  * @author Ibrahim Almalki & Trong Nguyen
  */
-public class CPUPlayer implements Player, Serializable {
+public class OnePlayer implements Serializable {
+    private static final int PASS_GO_COLLECT = 200;
     private final Collection<Square> properties;
     private final String playerName;
     private int money;
     private int position;
     private int jailTurns;
     private boolean inJail;
+    private boolean isHuman;
 
     /**
      * Constructor for CPU Player.
      * @param name    String
      */
-    public CPUPlayer(String name) {
+    public OnePlayer(String name, boolean isHuman) {
         this.properties = new LinkedList<>();
-        this.playerName = "CPU " + name;
+        if(isHuman) {
+            this.playerName = name;
+        } else {
+            this.playerName = "CPU " + name;
+        }
         this.money = 1500;
         this.position = 0;
         this.jailTurns = 0;
@@ -35,7 +41,6 @@ public class CPUPlayer implements Player, Serializable {
      * Movement of the player.
      * @param numTiles int
      */
-    @Override
     public void move(int numTiles) {
         this.position += numTiles;
         if (position >= BOARD_SIZE && !inJail) {
@@ -48,7 +53,6 @@ public class CPUPlayer implements Player, Serializable {
      * Passing the "GO" square giving the player $200
      * @param newPosition   int
      */
-    @Override
     public void moveTo(int newPosition) {
         if (newPosition < position) {
             exchangeMoney(PASS_GO_COLLECT);
@@ -60,7 +64,6 @@ public class CPUPlayer implements Player, Serializable {
      * Get the position of the player
      * @return  int
      */
-    @Override
     public int getPosition() {
         return this.position;
     }
@@ -69,7 +72,6 @@ public class CPUPlayer implements Player, Serializable {
      * Set if the player is in jail or not.
      * @param bool      boolean
      */
-    @Override
     public void setInJail(boolean bool) {
         inJail = bool;
     }
@@ -78,7 +80,6 @@ public class CPUPlayer implements Player, Serializable {
      * Properties owned by the player.
      * @return  Collection<Square>
      */
-    @Override
     public Collection<Square> properties() {
         return  this.properties;
     }
@@ -87,7 +88,6 @@ public class CPUPlayer implements Player, Serializable {
      * Get the name of the player.
      * @return  String
      */
-    @Override
     public String name() {
         return this.playerName;
     }
@@ -96,7 +96,6 @@ public class CPUPlayer implements Player, Serializable {
      * Get the amount of money owned by a player.
      * @return  int
      */
-    @Override
     public int getMoney() {
         return this.money;
     }
@@ -105,16 +104,24 @@ public class CPUPlayer implements Player, Serializable {
      * Set the amount of money a player has
      * @param money int
      */
-    @Override
-    public void exchangeMoney(int money) {
+    public void setMoney(int money) {
         this.money = money;
+    }
+
+
+
+    /**
+     * Set the amount of money a player has
+     * @param money int
+     */
+    public void exchangeMoney(int money) {
+        this.money += money;
     }
 
     /**
      * Method when a player buys a property.
      * @param square    Square
      */
-    @Override
     public void addProperty(Square square) {
         if (!square.isOwnable()) {
             throw new IllegalArgumentException("This property can not be purchased");
@@ -128,7 +135,6 @@ public class CPUPlayer implements Player, Serializable {
      * Method when a player to sells a property.
      * @param square Square
      */
-    @Override
     public void removeProperty(Square square) {
         this.properties.remove(square);
         this.money += square.cost();
@@ -139,8 +145,10 @@ public class CPUPlayer implements Player, Serializable {
      * @param state Monopoly.GameState
      * @return boolean
      */
-    @Override
     public boolean inputBool(GameState state) {
+        if(isHuman) {
+            return false;
+        }
         return switch (state.decisionState) {
             case NONE -> handleNone();
             case BUY_PROPERTY -> handleBuyProperty();
@@ -156,8 +164,10 @@ public class CPUPlayer implements Player, Serializable {
      * @param state Monopoly.GameState
      * @return int
      */
-    @Override
     public int inputInt(GameState state) {
+        if (isHuman) {
+            return 0;
+        }
         throw new IllegalArgumentException("No implementation use case for CPU to input integer");
     }
 
@@ -167,13 +177,11 @@ public class CPUPlayer implements Player, Serializable {
      * @param choices   String[]
      * @return          int
      */
-    @Override
     public int inputDecision(GameState state, String[] choices) {
         // CPU Player always selects true
         return 0;
     }
 
-    @Override
     public void addJailTurn() {
         jailTurns++;
     }
@@ -182,7 +190,6 @@ public class CPUPlayer implements Player, Serializable {
      * Get how many turn the player has been in jail.
      * @param turns     int
      */
-    @Override
     public void setJailTurns(int turns) {
         this.jailTurns = turns;
     }
@@ -191,7 +198,6 @@ public class CPUPlayer implements Player, Serializable {
      * Get the number of turns the player has been in jail.
      * @return     int
      */
-    @Override
     public int getJailTurns() {
         return this.jailTurns;
     }
@@ -201,7 +207,6 @@ public class CPUPlayer implements Player, Serializable {
      * @param propName  String
      * @return          Property
      */
-    @Override
     public Property getProperty(String propName) {
         for(Square prop: properties){
             if(propName.equals(prop.name())) {
@@ -212,7 +217,7 @@ public class CPUPlayer implements Player, Serializable {
     }
 
     /**
-     * CPU PLayer handling next turn.
+     * PLayer handling next turn.
      * @return  boolean
      */
     public boolean handleNone() {
@@ -254,5 +259,13 @@ public class CPUPlayer implements Player, Serializable {
     public boolean handleIncomeTax() {
         // Always pay taxes
         return true;
+    }
+
+    /**
+     * Get whether or not the player is human
+     * @return true if player is human
+     */
+    public boolean isHuman() {
+        return isHuman;
     }
 }

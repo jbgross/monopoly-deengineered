@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  */
 public class MonopolyTest {
     private Monopoly monopoly;
-    private Player humanPlayer;
-    private HumanPlayer humanPlayer2;
+    private OnePlayer humanPlayer;
+    private OnePlayer humanPlayer2;
     private int position = 1;
     private int rent = 2;
     private int oneHouse = 10;
@@ -32,8 +32,8 @@ public class MonopolyTest {
     @Before
     public void setUp() {
         monopoly = new Monopoly();
-        humanPlayer = new HumanPlayer("Tester1");
-        humanPlayer2 = new HumanPlayer("Tester2");
+        humanPlayer = new OnePlayer("Tester1", true);
+        humanPlayer2 = new OnePlayer("Tester2", true);
 
         oldKent = new Property(position, JsonParse.parseJSON(position, "UK"),
                 rent, oneHouse, twoHouse, threeHouse, fourHouse, hotel, propertyCost, houses);

@@ -1,5 +1,5 @@
-import monopoly17.HumanPlayer;
 import monopoly17.Property;
+import monopoly17.OnePlayer;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,8 +11,8 @@ import static org.junit.Assert.*;
  * Modified by Trong Nguyen
  */
 public class PropertyTest {
-    private final HumanPlayer humanPlayer = new HumanPlayer("Tester1");
-    private final HumanPlayer humanPlayer2 = new HumanPlayer("Tester2");
+    private final OnePlayer humanPlayer = new OnePlayer("Tester1", true);
+    private final OnePlayer humanPlayer2 = new OnePlayer("Tester2", true);
     private int position1;
     private int rent = 2;
     private int oneHouse = 10;

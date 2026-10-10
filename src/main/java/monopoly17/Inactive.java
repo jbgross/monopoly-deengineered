@@ -70,7 +70,7 @@ public class Inactive implements Square, Serializable {
      * @param player    Player
      */
     @Override
-    public void purchase(Player player) {
+    public void purchase(OnePlayer player) {
     }
 
     /**
@@ -88,7 +88,7 @@ public class Inactive implements Square, Serializable {
      * @return  Player
      */
     @Override
-    public Player owner() {
+    public OnePlayer owner() {
         return null;
     }
 }
