@@ -26,6 +26,7 @@ public class OnePlayer implements Serializable {
      */
     public OnePlayer(String name, boolean isHuman) {
         this.properties = new LinkedList<>();
+        this.isHuman = isHuman;
         if(isHuman) {
             this.playerName = name;
         } else {
