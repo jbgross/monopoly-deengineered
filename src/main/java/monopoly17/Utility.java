@@ -14,7 +14,7 @@ public class Utility implements Square, Serializable {
     private final String name;
     private Utility other;
     private int numOwned;
-    private OnePlayer owner;
+    private Player owner;
     private boolean owned;
     private final RollDice dice;
 
@@ -80,7 +80,7 @@ public class Utility implements Square, Serializable {
      * @param player    Player
      */
     @Override
-    public void purchase(OnePlayer player) {
+    public void purchase(Player player) {
         owned = true;
         owner = player;
         numOwned = 1;
@@ -116,7 +116,7 @@ public class Utility implements Square, Serializable {
      * @return  Player
      */
     @Override
-    public OnePlayer owner() {
+    public Player owner() {
         return owner;
     }
 

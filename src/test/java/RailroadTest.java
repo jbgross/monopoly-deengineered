@@ -67,7 +67,7 @@ public class RailroadTest {
      */
     @Test
     public void testIsOwned() {
-        OnePlayer player = new OnePlayer("Tester", true);
+        Player player = new Player("Tester", true);
         rA.purchase(player);
         Assert.assertTrue(rA.isOwned());
         Assert.assertFalse(rB.isOwned());
@@ -91,7 +91,7 @@ public class RailroadTest {
      */
     @Test
     public void testRent() {
-        OnePlayer player = new OnePlayer("Tester", true);
+        Player player = new Player("Tester", true);
         rA.purchase(player);
         rB.purchase(player);
         rC.purchase(player);
@@ -104,7 +104,7 @@ public class RailroadTest {
      */
     @Test
     public void testOwner() {
-        OnePlayer player = new OnePlayer("Tester", true);
+        Player player = new Player("Tester", true);
         rA.purchase(player);
         rB.purchase(player);
         rC.purchase(player);

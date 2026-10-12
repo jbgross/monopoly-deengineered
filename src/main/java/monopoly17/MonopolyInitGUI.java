@@ -18,7 +18,7 @@ import static monopoly17.Monopoly.MIN_PLAYERS;
  */
 public class MonopolyInitGUI extends JFrame {
     private MonopolyGUI monopolyGUI;
-    private final LinkedList<OnePlayer> playersList;                             // The list of players
+    private final LinkedList<Player> playersList;                             // The list of players
 
     // JButton
     private JButton startButton;
@@ -324,11 +324,11 @@ public class MonopolyInitGUI extends JFrame {
     private void addPlayerAction(ActionEvent actionEvent) {
         if (playersList.size() < MAX_PLAYERS && playerNameInput.getText().matches(".*\\w.*")) {
             // Make the panel to get the username
-            OnePlayer newPlayer;
+            Player newPlayer;
             if (actionEvent.getActionCommand().equals("Add Player")) {
-                newPlayer = new OnePlayer(playerNameInput.getText(), true);
+                newPlayer = new Player(playerNameInput.getText(), true);
             } else {
-                newPlayer = new OnePlayer(playerNameInput.getText(), false);
+                newPlayer = new Player(playerNameInput.getText(), false);
             }
             addNewPlayerPanel(newPlayer);
         } else if (!playerNameInput.getText().matches(".*\\w.*")) { // if the text box is empty/all whitespace
@@ -343,7 +343,7 @@ public class MonopolyInitGUI extends JFrame {
      * Creates a panel to display the players added to the game.
      * @param newPlayer     Player
      */
-    private void addNewPlayerPanel(OnePlayer newPlayer) {
+    private void addNewPlayerPanel(Player newPlayer) {
         playersList.add(newPlayer);
         JLabel playerNumber = new JLabel();
         playerNumber.setFont(playerFont);

@@ -10,7 +10,7 @@ import static monopoly17.GameBoard.BOARD_SIZE;
  * This class represents the CPU player of this game.
  * @author Ibrahim Almalki & Trong Nguyen
  */
-public class OnePlayer implements Serializable {
+public class Player implements Serializable {
     private static final int PASS_GO_COLLECT = 200;
     private final Collection<Square> properties;
     private final String playerName;
@@ -24,7 +24,7 @@ public class OnePlayer implements Serializable {
      * Constructor for CPU Player.
      * @param name    String
      */
-    public OnePlayer(String name, boolean isHuman) {
+    public Player(String name, boolean isHuman) {
         this.properties = new LinkedList<>();
         this.isHuman = isHuman;
         if(isHuman) {

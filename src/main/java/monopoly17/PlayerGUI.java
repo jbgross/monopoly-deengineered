@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author Trong Nguyen
  */
 public class PlayerGUI extends JPanel implements Serializable {
-    private final OnePlayer player;
+    private final Player player;
     private final int playerNumber;
     private static int totalPlayers = 0;
     private int currentSquareNumber = 0;
@@ -31,7 +31,7 @@ public class PlayerGUI extends JPanel implements Serializable {
      * @param playerName    String, the player's name
      */
     public PlayerGUI(Color color, String playerName) {
-        player = new OnePlayer(playerName, true);
+        player = new Player(playerName, true);
         totalPlayers++;
         this.playerNumber = totalPlayers;
         this.setBackground(color);
@@ -96,7 +96,7 @@ public class PlayerGUI extends JPanel implements Serializable {
      * Get the current player.
      * @return      Player
      */
-    public OnePlayer getPlayer() { return this.player; }
+    public Player getPlayer() { return this.player; }
 
     /**
      * Method for player to collect addition money.

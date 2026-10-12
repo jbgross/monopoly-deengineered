@@ -10,11 +10,11 @@ import java.util.LinkedList;
  */
 public class GameState implements Serializable {
     public Monopoly.DecisionState decisionState;
-    public LinkedList<OnePlayer> players;
+    public LinkedList<Player> players;
     public ArrayList<PlayerGUI> playersGUI;
     public GameBoardGUI gameBoardGUI;
     public GameBoard gameBoard;
-    public OnePlayer currentPlayer;
+    public Player currentPlayer;
     public int currentPlayerOrder;
     public int currentSquareNumber;
 }

@@ -36,7 +36,7 @@ public class Monopoly implements Serializable {
      * Get the list of Players in the game state.
      * @return  LinkedList<Player>
      */
-    public LinkedList<OnePlayer> getPlayers() {
+    public LinkedList<Player> getPlayers() {
         return gameState.players;
     }
 
@@ -121,7 +121,7 @@ public class Monopoly implements Serializable {
             }
         }
         try {
-            OnePlayer winner = gameState.players.remove();
+            Player winner = gameState.players.remove();
             System.out.println("Monopoly winner: " + winner.name());
         } catch (NoSuchElementException ignored) {
             // Since when the game first start there are no players.
@@ -132,7 +132,7 @@ public class Monopoly implements Serializable {
      * Prints the state of the players name, current balance and their properties owned.
      */
     public void printState() {
-        OnePlayer player = gameState.currentPlayer;
+        Player player = gameState.currentPlayer;
 
         System.out.println("-----------------------------------------------");
         System.out.println("Player name: " + player.name());
@@ -153,7 +153,7 @@ public class Monopoly implements Serializable {
      * @param roll      int
      * @return          ArrayList<Integer>
      */
-    public ArrayList<Integer> handleSquare(OnePlayer player, Square square, int roll) {
+    public ArrayList<Integer> handleSquare(Player player, Square square, int roll) {
         boolean owned = square.isOwned();
         boolean ownable = square.isOwnable();
         if (square instanceof  Jail) {
@@ -181,7 +181,7 @@ public class Monopoly implements Serializable {
      * @param player  Player
      *
      */
-    public boolean buyHouses(OnePlayer player, Property property){
+    public boolean buyHouses(Player player, Property property){
         // Check if property is a monopoly or a hotel
         if (property.getBuildings() == 5 || !property.isMonopoly()){
             System.out.println("You already have a hotel");
@@ -208,7 +208,7 @@ public class Monopoly implements Serializable {
      * @param player    Player
      * @param square    Square
      */
-    public void unowned(OnePlayer player, Square square) {
+    public void unowned(Player player, Square square) {
         int cost = square.cost();
 
         if (player.getMoney() < cost) {
@@ -237,7 +237,7 @@ public class Monopoly implements Serializable {
      * @param player    Player
      * @param square    Square
      */
-    public void buyProperty(OnePlayer player, Square square) {
+    public void buyProperty(Player player, Square square) {
         if (player == null || square == null) return;
         if (!square.isOwnable()) return;
         player.addProperty(square);
@@ -250,7 +250,7 @@ public class Monopoly implements Serializable {
      * @param square    Square
      * @param roll      int
      */
-    public void owned(OnePlayer player, Square square, int roll) {
+    public void owned(Player player, Square square, int roll) {
         int rent = square.rent(roll);
         if (square instanceof Utility) {
             // Increase rent depends on roll value
@@ -260,7 +260,7 @@ public class Monopoly implements Serializable {
             // Railroad cost double if owned
             rent *= 2;
         }
-        OnePlayer owner = square.owner();
+        Player owner = square.owner();
         if (player.name().equals(owner.name())) {
             System.out.println("You own " + square.name());
             return;
@@ -285,7 +285,7 @@ public class Monopoly implements Serializable {
      * @param tax       Taxes
      * @param square    Square
      */
-    public void payTax(OnePlayer player, Taxes tax, Square square) {
+    public void payTax(Player player, Taxes tax, Square square) {
         int cost;
         gameState.decisionState = DecisionState.TAX;
         // Income Tax square
@@ -302,7 +302,7 @@ public class Monopoly implements Serializable {
      * Method features for moving player using owned railroads.
      * @param player    Player
      */
-    public void railroadMove(OnePlayer player) {
+    public void railroadMove(Player player) {
         int position = player.getPosition();
         // Iterate from current position to the end
         for (int i = position; i < gameState.gameBoard.size(); i++) {
@@ -332,7 +332,7 @@ public class Monopoly implements Serializable {
      * @param player    Player
      * @param jail      Jail
      */
-    public void jailAction(OnePlayer player, Jail jail) {
+    public void jailAction(Player player, Jail jail) {
         Jail.JailType type = jail.getType();
         if (type == Jail.JailType.GOTO_JAIL) {
             System.out.println("You have landed on GO TO JAIL. You are now in Jail.");
@@ -346,7 +346,7 @@ public class Monopoly implements Serializable {
      * Action when player is currently in jail.
      * @param player    Player
      */
-    private void inJail(OnePlayer player) {
+    private void inJail(Player player) {
         if (rollDice.rollDice().isDouble) {
             System.out.println("You have rolled doubles. You are now out of Jail.\nRoll again!\n");
             player.setJailTurns(0);
@@ -366,7 +366,7 @@ public class Monopoly implements Serializable {
      * Action when player lands on Go To Jail
      * @param player    Player
      */
-    private void goToJail(OnePlayer player) {
+    private void goToJail(Player player) {
         System.out.println("Go to Jail!");
         player.moveTo(Jail.IN_JAIL);
         player.addJailTurn();
@@ -378,7 +378,7 @@ public class Monopoly implements Serializable {
      * @param player    Player
      * @return          int
      */
-    public int leaveJail(OnePlayer player) {
+    public int leaveJail(Player player) {
         System.out.println("You have paid Bail!");
         int JAIL_COST = 50;
         if (player.getMoney() >= JAIL_COST) {

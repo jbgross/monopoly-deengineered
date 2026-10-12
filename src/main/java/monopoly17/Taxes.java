@@ -105,7 +105,7 @@ public class Taxes implements Square, Serializable {
      * @param player    Player
      */
     @Override
-    public void purchase(OnePlayer player) {
+    public void purchase(Player player) {
     }
 
     /**
@@ -123,7 +123,7 @@ public class Taxes implements Square, Serializable {
      * @return  Player
      */
     @Override
-    public OnePlayer owner() {
+    public Player owner() {
         return null;
     }
 }

@@ -33,7 +33,7 @@ import static monopoly17.GameBoard.BOARD_SIZE;
 public class MonopolyGUI extends JPanel {
     private Monopoly monopoly;
     private ArrayList<PlayerGUI> playersGUI;                            // List of player token positions
-    private LinkedList<OnePlayer> playersList;                             // The list of players
+    private LinkedList<Player> playersList;                             // The list of players
     private boolean isDouble;
     private int currentPlayerOrder;
     private int currentSquareNumber;
@@ -101,7 +101,7 @@ public class MonopolyGUI extends JPanel {
      * Set the players list.
      * @param players    LinkedList<Player>
      */
-    public void setPlayers(LinkedList<OnePlayer> players) {
+    public void setPlayers(LinkedList<Player> players) {
         playersList.addAll(players);
     }
 
